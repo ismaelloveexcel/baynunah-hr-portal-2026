@@ -12,6 +12,8 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     name: Validate Deployment Request
+    permissions:
+      contents: read
     steps:
       - name: Check confirmation
         run: |
@@ -25,6 +27,8 @@ jobs:
     needs: validate
     runs-on: ubuntu-latest
     name: Build and Deploy to Production
+    permissions:
+      contents: write
     environment:
       name: production
       url: ${{ steps.deploy.outputs.static_web_app_url }}
