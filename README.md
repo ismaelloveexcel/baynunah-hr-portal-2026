@@ -63,8 +63,9 @@ See [agents/README.md](agents/README.md) for detailed agent documentation.
 
 ## 🛠 Technology Stack
 
-- **Framework**: Next.js 14 with App Router
+- **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript (strict mode)
+- **UI Library**: React 19
 - **Styling**: Tailwind CSS
 - **API**: Azure Functions (Node.js 20)
 - **Hosting**: Azure Static Web Apps
@@ -233,9 +234,10 @@ cd workspace/HR-Portal-Final && npm run lint
 ## 🔒 Security
 
 ### Dependency Management
-- Next.js updated to **14.2.35** (addresses CVE-2024 vulnerabilities)
+- Next.js updated to **15.2.9** (fully patched - all CVE-2024 vulnerabilities resolved)
+- React updated to **19.0.0** (required for Next.js 15)
 - All dependencies regularly audited for vulnerabilities
-- See [SECURITY_UPDATES.md](SECURITY_UPDATES.md) for details
+- See [SECURITY_UPDATES.md](SECURITY_UPDATES.md) for complete details
 
 ### Best Practices
 - Run `npm audit` before deployment

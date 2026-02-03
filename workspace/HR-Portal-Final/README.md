@@ -1,8 +1,8 @@
-# Baynunah HR Portal - Next.js 14 with Multi-Agent AI System
+# Baynunah HR Portal - Next.js 15 with Multi-Agent AI System
 
 ## 🚀 Overview
 
-This is an AI-supervised Employee Self-Service (ESS) and HR Portal built with Next.js 14, Azure Static Web Apps, and Azure Functions. The system features a sophisticated multi-agent architecture with 1 Supervisor Agent coordinating 7 specialized agents.
+This is an AI-supervised Employee Self-Service (ESS) and HR Portal built with Next.js 15, React 19, Azure Static Web Apps, and Azure Functions. The system features a sophisticated multi-agent architecture with 1 Supervisor Agent coordinating 7 specialized agents.
 
 ## 🤖 Multi-Agent Architecture
 
@@ -26,7 +26,8 @@ Central orchestrator that:
 
 ## 🛠 Technology Stack
 
-- **Framework:** Next.js 14 with App Router
+- **Framework:** Next.js 15 with App Router
+- **UI Library:** React 19
 - **Language:** TypeScript (strict mode)
 - **Styling:** Tailwind CSS
 - **API:** Azure Functions (Node.js 20)
