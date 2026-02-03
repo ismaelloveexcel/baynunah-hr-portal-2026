@@ -38,6 +38,9 @@ const httpTrigger: AzureFunction = async function (
 
   const chatRequest: ChatRequest = req.body;
 
+  // Log the incoming request for monitoring
+  context.log('Chat request received with', chatRequest.messages.length, 'messages');
+
   // Placeholder response - In production, integrate with Azure OpenAI
   const placeholderResponse = {
     id: 'chatcmpl-' + Date.now(),
