@@ -1,0 +1,66 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'workspace/HR-Portal-Final/**'
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy to Staging
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.static_web_app_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: workspace/HR-Portal-Final/package-lock.json
+
+      - name: Install dependencies
+        working-directory: workspace/HR-Portal-Final
+        run: npm ci
+
+      - name: Run linter
+        working-directory: workspace/HR-Portal-Final
+        run: npm run lint
+
+      - name: Build Next.js app
+        working-directory: workspace/HR-Portal-Final
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Azure Static Web Apps (Staging)
+        id: deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.SWA_STAGING_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "workspace/HR-Portal-Final"
+          api_location: "workspace/HR-Portal-Final/api"
+          output_location: ".next"
+          skip_app_build: true
+
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "✅ Staging deployment successful!"
+          echo "URL: ${{ steps.deploy.outputs.static_web_app_url }}"
+
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "❌ Staging deployment failed!"
+          exit 1

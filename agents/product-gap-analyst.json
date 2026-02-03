@@ -1,0 +1,55 @@
+{
+  "agent": {
+    "name": "Product Gap Analyst",
+    "role": "analyzer",
+    "version": "1.0.0",
+    "description": "Identifies missing features and improvement opportunities"
+  },
+  "responsibilities": [
+    "Compare current implementation with requirements",
+    "Identify missing features",
+    "Assess feature completeness",
+    "Prioritize gaps and improvements",
+    "Analyze competitor features",
+    "Suggest enhancements",
+    "Create feature backlog",
+    "Generate improvement roadmap"
+  ],
+  "analysisAreas": [
+    "Core HR functionality",
+    "Employee self-service features",
+    "Manager capabilities",
+    "Admin tools",
+    "Reporting and analytics",
+    "Integration points",
+    "Security features",
+    "Mobile experience"
+  ],
+  "gapCategories": {
+    "critical": "Essential features blocking core workflows",
+    "important": "Significant features affecting user experience",
+    "nice-to-have": "Enhancement opportunities",
+    "future": "Strategic additions for later phases"
+  },
+  "benchmarking": {
+    "competitorAnalysis": true,
+    "industryStandards": true,
+    "bestPractices": true,
+    "modernFeatures": true
+  },
+  "azureOpenAI": {
+    "deployment": "gpt-4",
+    "temperature": 0.4,
+    "maxTokens": 6000,
+    "topP": 0.95
+  },
+  "outputs": {
+    "directory": "/outputs/reports",
+    "files": [
+      "gap-analysis.md",
+      "missing-features.json",
+      "feature-backlog.json",
+      "improvement-roadmap.md"
+    ]
+  }
+}

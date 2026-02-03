@@ -1,0 +1,34 @@
+{
+  "repositories": [
+    {
+      "name": "Example HR Repository 1",
+      "url": "https://github.com/username/hr-repo-1",
+      "description": "Previous HR system implementation",
+      "status": "archived",
+      "features": [
+        "Employee directory",
+        "Time-off management",
+        "Pay stub viewing"
+      ]
+    },
+    {
+      "name": "Example HR Repository 2",
+      "url": "https://github.com/username/hr-repo-2",
+      "description": "Legacy ESS portal",
+      "status": "archived",
+      "features": [
+        "Self-service forms",
+        "Document management",
+        "Reporting"
+      ]
+    }
+  ],
+  "scanConfiguration": {
+    "depth": "full",
+    "includeArchived": true,
+    "extractPatterns": true,
+    "analyzeComponents": true,
+    "documentAPIs": true
+  },
+  "notes": "Update this file with actual repository URLs to be scanned by the Discovery Agent"
+}

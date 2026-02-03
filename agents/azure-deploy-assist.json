@@ -1,0 +1,93 @@
+{
+  "agent": {
+    "name": "Azure Deploy Assist",
+    "role": "devops",
+    "version": "1.0.0",
+    "description": "Provisions, configures, and deploys to Azure"
+  },
+  "responsibilities": [
+    "Provision Azure resources",
+    "Configure Azure Static Web Apps",
+    "Set up Azure Functions",
+    "Configure Azure OpenAI integration",
+    "Manage deployment pipelines",
+    "Set up preview environments",
+    "Configure staging and production",
+    "Monitor deployment health",
+    "Handle rollbacks if needed"
+  ],
+  "azureResources": {
+    "staticWebApp": {
+      "sku": "Standard",
+      "regions": ["primary", "failover"],
+      "customDomain": true
+    },
+    "functions": {
+      "runtime": "node",
+      "version": "18",
+      "plan": "consumption"
+    },
+    "openAI": {
+      "service": "Azure OpenAI",
+      "models": ["gpt-4", "gpt-4-vision"],
+      "region": "eastus"
+    },
+    "monitoring": {
+      "applicationInsights": true,
+      "logAnalytics": true
+    }
+  },
+  "deploymentStrategy": {
+    "prPreview": {
+      "enabled": true,
+      "autoCreate": true,
+      "autoDelete": true
+    },
+    "staging": {
+      "branch": "main",
+      "autoDeployOnPush": true,
+      "requireApproval": false
+    },
+    "production": {
+      "manualPromote": true,
+      "requireApproval": true,
+      "rollbackEnabled": true
+    }
+  },
+  "cicd": {
+    "tool": "GitHub Actions",
+    "workflows": [
+      "pr-preview.yml",
+      "staging-deploy.yml",
+      "production-deploy.yml"
+    ],
+    "secrets": [
+      "SWA_STAGING_TOKEN",
+      "SWA_PROD_TOKEN",
+      "AZURE_OPENAI_KEY",
+      "AZURE_OPENAI_ENDPOINT"
+    ]
+  },
+  "healthChecks": {
+    "endpoints": [
+      "/api/healthcheck",
+      "/"
+    ],
+    "interval": "5m",
+    "timeout": "30s"
+  },
+  "azureOpenAI": {
+    "deployment": "gpt-4",
+    "temperature": 0.2,
+    "maxTokens": 4000,
+    "topP": 0.9
+  },
+  "outputs": {
+    "directory": "/outputs/reports",
+    "files": [
+      "deployment-status.json",
+      "resource-inventory.json",
+      "deployment-logs.md"
+    ]
+  }
+}

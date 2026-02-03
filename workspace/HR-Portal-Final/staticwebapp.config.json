@@ -1,0 +1,19 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*"]
+  },
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous", "authenticated"]
+    }
+  ],
+  "platform": {
+    "apiRuntime": "node:18"
+  },
+  "trailingSlash": "auto",
+  "globalHeaders": {
+    "cache-control": "public, max-age=3600"
+  }
+}

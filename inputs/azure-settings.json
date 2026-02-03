@@ -1,0 +1,66 @@
+{
+  "azure": {
+    "subscriptionId": "${AZURE_SUBSCRIPTION_ID}",
+    "resourceGroup": "rg-baynunah-hr-portal",
+    "region": "eastus",
+    "tags": {
+      "project": "baynunah-hr-portal",
+      "environment": "multi",
+      "managed-by": "ai-agents"
+    }
+  },
+  "staticWebApp": {
+    "staging": {
+      "name": "swa-baynunah-hr-staging",
+      "sku": "Standard",
+      "token": "${SWA_STAGING_TOKEN}",
+      "customDomain": ""
+    },
+    "production": {
+      "name": "swa-baynunah-hr-prod",
+      "sku": "Standard",
+      "token": "${SWA_PROD_TOKEN}",
+      "customDomain": ""
+    }
+  },
+  "functions": {
+    "appName": "func-baynunah-hr",
+    "runtime": "node",
+    "runtimeVersion": "18",
+    "plan": "consumption"
+  },
+  "openAI": {
+    "resourceName": "openai-baynunah-hr",
+    "sku": "S0",
+    "deployments": [
+      {
+        "name": "gpt-4",
+        "model": "gpt-4",
+        "version": "0613",
+        "capacity": 10
+      },
+      {
+        "name": "gpt-4-vision",
+        "model": "gpt-4-vision-preview",
+        "version": "vision-preview",
+        "capacity": 10
+      }
+    ]
+  },
+  "monitoring": {
+    "applicationInsights": {
+      "name": "appi-baynunah-hr",
+      "retentionDays": 90
+    },
+    "logAnalytics": {
+      "name": "log-baynunah-hr",
+      "retentionDays": 90
+    }
+  },
+  "security": {
+    "keyVault": {
+      "name": "kv-baynunah-hr",
+      "enableRbac": true
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "agent": {
+    "name": "Discovery Agent",
+    "role": "analyzer",
+    "version": "1.0.0",
+    "description": "Deep-scan all repos and build the Feature Inventory"
+  },
+  "responsibilities": [
+    "Scan all previous HR-related repositories",
+    "Extract features and capabilities",
+    "Document tech stack and dependencies",
+    "Identify reusable components",
+    "Build comprehensive feature inventory",
+    "Assess code quality and patterns",
+    "Generate repository analysis reports"
+  ],
+  "inputs": {
+    "repositories": [
+      "List of HR repositories to scan"
+    ],
+    "scanDepth": "full",
+    "includeArchived": false
+  },
+  "analysis": {
+    "codePatterns": true,
+    "dependencies": true,
+    "apiEndpoints": true,
+    "uiComponents": true,
+    "databaseSchemas": true,
+    "configFiles": true
+  },
+  "azureOpenAI": {
+    "deployment": "gpt-4",
+    "temperature": 0.2,
+    "maxTokens": 8000,
+    "topP": 0.9
+  },
+  "outputs": {
+    "directory": "/outputs/reports",
+    "files": [
+      "feature-inventory.json",
+      "repository-analysis.md",
+      "tech-stack-summary.json",
+      "reusable-components.json"
+    ]
+  }
+}

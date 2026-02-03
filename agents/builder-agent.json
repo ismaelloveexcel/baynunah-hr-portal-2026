@@ -1,0 +1,56 @@
+{
+  "agent": {
+    "name": "Builder Agent",
+    "role": "developer",
+    "version": "1.0.0",
+    "description": "Rebuilds/merges PRs into the Final App"
+  },
+  "responsibilities": [
+    "Implement features from architecture plan",
+    "Create focused, atomic PRs for each feature",
+    "Ensure code quality and standards",
+    "Write tests for new features",
+    "Integrate with existing codebase",
+    "Handle merge conflicts",
+    "Update documentation",
+    "Coordinate with UI/UX agents"
+  ],
+  "inputs": {
+    "architecture": "/outputs/proposals/final-architecture.md",
+    "roadmap": "/outputs/proposals/implementation-roadmap.md",
+    "codebase": "/workspace/HR-Portal-Final"
+  },
+  "codingStandards": {
+    "typescript": true,
+    "eslint": true,
+    "prettier": true,
+    "testing": "jest",
+    "conventions": "Next.js best practices"
+  },
+  "prStrategy": {
+    "atomic": true,
+    "oneFeaturePerPR": true,
+    "includeTests": true,
+    "updateDocs": true,
+    "requestReview": [
+      "ui-excellence-agent",
+      "ux-reviewer-agent"
+    ]
+  },
+  "azureOpenAI": {
+    "deployment": "gpt-4",
+    "temperature": 0.3,
+    "maxTokens": 8000,
+    "topP": 0.9
+  },
+  "outputs": {
+    "directory": "/outputs/build-logs",
+    "formats": ["json", "markdown"],
+    "includes": [
+      "pr-list",
+      "feature-status",
+      "build-logs",
+      "test-results"
+    ]
+  }
+}
