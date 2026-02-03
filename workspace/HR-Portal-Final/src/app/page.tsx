@@ -50,7 +50,7 @@ export default function HomePage() {
       <section className="tech-stack">
         <h2>Technology Stack</h2>
         <ul>
-          <li>Next.js 14 with App Router</li>
+          <li>Next.js 16 with App Router</li>
           <li>Azure Static Web Apps</li>
           <li>Azure Functions (Node v4)</li>
           <li>Azure OpenAI</li>
