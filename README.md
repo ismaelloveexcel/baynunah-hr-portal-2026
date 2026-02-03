@@ -230,6 +230,24 @@ cd workspace/HR-Portal-Final && npm run lint
 5. Review preview deployment
 6. Merge after approval
 
+## 🔒 Security
+
+### Dependency Management
+- Next.js updated to **14.2.35** (addresses CVE-2024 vulnerabilities)
+- All dependencies regularly audited for vulnerabilities
+- See [SECURITY_UPDATES.md](SECURITY_UPDATES.md) for details
+
+### Best Practices
+- Run `npm audit` before deployment
+- Keep dependencies up to date
+- Use environment variables for secrets
+- Enable Azure AD authentication in production
+- Configure CORS properly
+- Review security advisories regularly
+
+### Reporting Security Issues
+Please report security vulnerabilities to the security team, not via public issues.
+
 ## 📄 License
 
 Proprietary - Baynunah HR Portal 2026
