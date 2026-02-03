@@ -1,0 +1,23 @@
+{
+  "agent_id": "reports-agent",
+  "agent_name": "Reports Agent",
+  "version": "1.0.0",
+  "description": "Handles analytics and reporting",
+  "capabilities": [
+    "data_aggregation",
+    "report_generation",
+    "dashboard_creation",
+    "trend_analysis"
+  ],
+  "knowledge_domains": [
+    "hr_metrics",
+    "data_visualization",
+    "analytics",
+    "reporting_standards"
+  ],
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.3,
+    "max_tokens": 2000
+  }
+}

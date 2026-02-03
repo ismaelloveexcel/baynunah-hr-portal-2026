@@ -1,0 +1,89 @@
+name: PR Preview Deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    name: Build and Deploy PR Preview
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: workspace/HR-Portal-Final/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd workspace/HR-Portal-Final
+          npm ci
+
+      - name: Type check
+        run: |
+          cd workspace/HR-Portal-Final
+          npm run type-check
+
+      - name: Lint
+        run: |
+          cd workspace/HR-Portal-Final
+          npm run lint
+
+      - name: Build application
+        run: |
+          cd workspace/HR-Portal-Final
+          npm run build
+
+      - name: Build Azure Functions
+        run: |
+          cd workspace/HR-Portal-Final/api
+          npm ci
+          npm run build
+
+      - name: Deploy to Azure Static Web Apps (Preview)
+        id: deploy_preview
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PREVIEW }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "workspace/HR-Portal-Final"
+          api_location: "workspace/HR-Portal-Final/api"
+          output_location: ".next"
+          skip_app_build: true
+          skip_api_build: true
+
+      - name: Comment PR with preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const previewUrl = '${{ steps.deploy_preview.outputs.static_web_app_url }}';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Preview deployment ready!**\n\n✅ Your PR has been deployed to: ${previewUrl}\n\n🤖 Multi-agent system is configured and ready for testing.`
+            })
+
+  close_pull_request_job:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    
+    steps:
+      - name: Close Azure Static Web Apps Preview
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PREVIEW }}
+          action: "close"

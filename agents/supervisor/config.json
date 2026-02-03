@@ -1,0 +1,37 @@
+{
+  "agent_id": "supervisor",
+  "agent_name": "Supervisor Agent",
+  "version": "1.0.0",
+  "description": "Central orchestrator for the multi-agent HR system",
+  "capabilities": [
+    "request_routing",
+    "multi_agent_coordination",
+    "response_aggregation",
+    "health_monitoring",
+    "escalation_handling"
+  ],
+  "managed_agents": [
+    "hr-agent",
+    "payroll-agent",
+    "leave-agent",
+    "recruitment-agent",
+    "training-agent",
+    "performance-agent",
+    "reports-agent"
+  ],
+  "routing_rules": {
+    "employee_info": ["hr-agent"],
+    "salary": ["payroll-agent"],
+    "leave": ["leave-agent"],
+    "recruitment": ["recruitment-agent"],
+    "training": ["training-agent"],
+    "performance": ["performance-agent"],
+    "reports": ["reports-agent"],
+    "complex_query": ["multiple_agents"]
+  },
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 2000
+  }
+}

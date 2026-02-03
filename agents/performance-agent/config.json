@@ -1,0 +1,23 @@
+{
+  "agent_id": "performance-agent",
+  "agent_name": "Performance Agent",
+  "version": "1.0.0",
+  "description": "Handles performance reviews and goal management",
+  "capabilities": [
+    "review_management",
+    "goal_tracking",
+    "feedback_collection",
+    "performance_analytics"
+  ],
+  "knowledge_domains": [
+    "performance_reviews",
+    "goal_setting",
+    "feedback_systems",
+    "improvement_plans"
+  ],
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.5,
+    "max_tokens": 1500
+  }
+}

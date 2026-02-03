@@ -1,0 +1,54 @@
+{
+  "name": "Baynunah HR Portal Dev Environment",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/azure/azure-dev/azd:latest": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-azurefunctions",
+        "ms-azuretools.vscode-azurestaticwebapps",
+        "ms-vscode.azure-account",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true
+      }
+    }
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  
+  "forwardPorts": [3000, 7071],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js App",
+      "onAutoForward": "notify"
+    },
+    "7071": {
+      "label": "Azure Functions",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "remoteUser": "node"
+}
