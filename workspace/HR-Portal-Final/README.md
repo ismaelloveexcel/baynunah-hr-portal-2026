@@ -1,6 +1,6 @@
 # Baynunah HR Portal - Final Application
 
-Modern Employee Self-Service (ESS) / HR Portal built with Next.js 14 and Azure.
+Modern Employee Self-Service (ESS) / HR Portal built with Next.js 16 and Azure.
 
 ## Overview
 
@@ -8,11 +8,11 @@ This is the main application workspace for the Baynunah HR Portal, built and mai
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14 (App Router), TypeScript, React 18
+- **Frontend**: Next.js 16 (App Router), TypeScript, React 19
 - **Styling**: Custom CSS with modern design system
 - **API**: Azure Functions (Node.js 18)
 - **Hosting**: Azure Static Web Apps
-- **Code Quality**: ESLint, Prettier
+- **Code Quality**: ESLint 9, Prettier
 
 ## Getting Started
 
@@ -79,8 +79,9 @@ npm run format
 - Azure Static Web Apps integration
 - Azure Functions API backend
 - TypeScript support
-- ESLint and Prettier configuration
+- ESLint 9 (flat config) and Prettier configuration
 - Health check endpoint
+- **Security**: All known vulnerabilities patched (Next.js 16.1.6)
 
 ### Planned Features
 

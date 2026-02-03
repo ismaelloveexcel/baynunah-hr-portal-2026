@@ -5,7 +5,7 @@ The system analyzes all my previous HR‑related repositories, extracts and refa
 
 🚀 Core Stack
 
-Next.js 14 (App Router) — Frontend
+Next.js 16 (App Router) — Frontend
 Azure Static Web Apps (SWA) — Hosting
 Azure Functions (Node v4) — API Layer
 Azure OpenAI — AI Supervisor + workflow agents
