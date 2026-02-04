@@ -1,0 +1,23 @@
+{
+  "agent_id": "recruitment-agent",
+  "agent_name": "Recruitment Agent",
+  "version": "1.0.0",
+  "description": "Handles recruitment and onboarding processes",
+  "capabilities": [
+    "job_posting",
+    "candidate_management",
+    "interview_scheduling",
+    "onboarding"
+  ],
+  "knowledge_domains": [
+    "recruitment_process",
+    "candidate_evaluation",
+    "interview_techniques",
+    "onboarding_procedures"
+  ],
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.6,
+    "max_tokens": 1500
+  }
+}

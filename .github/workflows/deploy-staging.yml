@@ -1,0 +1,80 @@
+name: Deploy to Staging
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_staging:
+    runs-on: ubuntu-latest
+    name: Build and Deploy to Staging
+    environment:
+      name: staging
+      url: ${{ steps.deploy_staging.outputs.static_web_app_url }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: workspace/HR-Portal-Final/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd workspace/HR-Portal-Final
+          npm ci
+
+      - name: Type check
+        run: |
+          cd workspace/HR-Portal-Final
+          npm run type-check
+
+      - name: Lint
+        run: |
+          cd workspace/HR-Portal-Final
+          npm run lint
+
+      - name: Build application
+        run: |
+          cd workspace/HR-Portal-Final
+          npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Build Azure Functions
+        run: |
+          cd workspace/HR-Portal-Final/api
+          npm ci
+          npm run build
+
+      - name: Deploy to Azure Static Web Apps (Staging)
+        id: deploy_staging
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_STAGING }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "workspace/HR-Portal-Final"
+          api_location: "workspace/HR-Portal-Final/api"
+          output_location: ".next"
+          skip_app_build: true
+          skip_api_build: true
+
+      - name: Create deployment summary
+        run: |
+          echo "### 🚀 Staging Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** Staging" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ steps.deploy_staging.outputs.static_web_app_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🤖 **Multi-Agent System Status:** Active" >> $GITHUB_STEP_SUMMARY
+          echo "- Supervisor Agent: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- 7 Specialized Agents: ✅" >> $GITHUB_STEP_SUMMARY

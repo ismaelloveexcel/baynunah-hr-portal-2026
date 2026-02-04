@@ -1,0 +1,23 @@
+{
+  "agent_id": "hr-agent",
+  "agent_name": "HR Agent",
+  "version": "1.0.0",
+  "description": "Handles employee information and general HR inquiries",
+  "capabilities": [
+    "employee_info_retrieval",
+    "policy_guidance",
+    "procedure_explanation",
+    "hr_best_practices"
+  ],
+  "knowledge_domains": [
+    "employee_profiles",
+    "hr_policies",
+    "company_procedures",
+    "compliance"
+  ],
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.5,
+    "max_tokens": 1500
+  }
+}

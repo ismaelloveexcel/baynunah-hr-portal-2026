@@ -1,0 +1,23 @@
+{
+  "agent_id": "training-agent",
+  "agent_name": "Training Agent",
+  "version": "1.0.0",
+  "description": "Handles training and development programs",
+  "capabilities": [
+    "program_management",
+    "course_enrollment",
+    "skills_tracking",
+    "certification_management"
+  ],
+  "knowledge_domains": [
+    "training_programs",
+    "learning_paths",
+    "skill_development",
+    "certifications"
+  ],
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.5,
+    "max_tokens": 1500
+  }
+}

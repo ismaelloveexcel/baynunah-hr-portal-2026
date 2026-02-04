@@ -1,0 +1,23 @@
+{
+  "agent_id": "payroll-agent",
+  "agent_name": "Payroll Agent",
+  "version": "1.0.0",
+  "description": "Handles payroll processing and salary inquiries",
+  "capabilities": [
+    "salary_info",
+    "payroll_processing",
+    "tax_calculation",
+    "deduction_management"
+  ],
+  "knowledge_domains": [
+    "payroll_systems",
+    "tax_regulations",
+    "compensation",
+    "benefits"
+  ],
+  "azure_openai": {
+    "model": "gpt-4",
+    "temperature": 0.3,
+    "max_tokens": 1500
+  }
+}
