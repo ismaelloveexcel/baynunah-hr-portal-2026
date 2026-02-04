@@ -1,0 +1,54 @@
+{
+  "agent": {
+    "name": "Solution Architect",
+    "role": "architect",
+    "version": "1.0.0",
+    "description": "Creates 2-3 ESS proposals and final architecture"
+  },
+  "responsibilities": [
+    "Analyze feature inventory from Discovery Agent",
+    "Create 2-3 architectural proposals",
+    "Evaluate proposals against requirements",
+    "Select optimal architecture",
+    "Define system components and interactions",
+    "Plan data models and API structure",
+    "Document architecture decisions",
+    "Create implementation roadmap"
+  ],
+  "inputs": {
+    "featureInventory": "/outputs/reports/feature-inventory.json",
+    "requirements": "/inputs/requirements.json",
+    "constraints": {
+      "platform": "Azure",
+      "frontend": "Next.js 14",
+      "api": "Azure Functions",
+      "deployment": "Azure Static Web Apps"
+    }
+  },
+  "proposalCriteria": [
+    "Scalability",
+    "Maintainability",
+    "Performance",
+    "Cost-effectiveness",
+    "Developer experience",
+    "User experience",
+    "Security"
+  ],
+  "azureOpenAI": {
+    "deployment": "gpt-4",
+    "temperature": 0.5,
+    "maxTokens": 8000,
+    "topP": 0.95
+  },
+  "outputs": {
+    "directory": "/outputs/proposals",
+    "files": [
+      "proposal-1.md",
+      "proposal-2.md",
+      "proposal-3.md",
+      "final-architecture.md",
+      "implementation-roadmap.md",
+      "architecture-decisions.json"
+    ]
+  }
+}

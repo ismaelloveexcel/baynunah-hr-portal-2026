@@ -1,0 +1,93 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "deploy" to confirm production deployment'
+        required: true
+        type: string
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Deployment Request
+    permissions:
+      contents: read
+    steps:
+      - name: Check confirmation
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "deploy" ]; then
+            echo "❌ Deployment cancelled: confirmation not provided"
+            exit 1
+          fi
+          echo "✅ Deployment confirmed"
+
+  build_and_deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    name: Build and Deploy to Production
+    permissions:
+      contents: write
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.static_web_app_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: workspace/HR-Portal-Final/package-lock.json
+
+      - name: Install dependencies
+        working-directory: workspace/HR-Portal-Final
+        run: npm ci
+
+      - name: Run linter
+        working-directory: workspace/HR-Portal-Final
+        run: npm run lint
+
+      - name: Build Next.js app
+        working-directory: workspace/HR-Portal-Final
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Azure Static Web Apps (Production)
+        id: deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.SWA_PROD_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "workspace/HR-Portal-Final"
+          api_location: "workspace/HR-Portal-Final/api"
+          output_location: ".next"
+          skip_app_build: true
+
+      - name: Create deployment tag
+        if: success()
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          TAG_NAME="production-$(date +'%Y%m%d-%H%M%S')"
+          git tag -a "$TAG_NAME" -m "Production deployment"
+          git push origin "$TAG_NAME"
+
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "🎉 Production deployment successful!"
+          echo "URL: ${{ steps.deploy.outputs.static_web_app_url }}"
+
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "❌ Production deployment failed!"
+          echo "Check logs and consider rollback if needed"
+          exit 1

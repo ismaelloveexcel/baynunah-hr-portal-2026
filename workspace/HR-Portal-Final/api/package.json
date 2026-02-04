@@ -1,0 +1,16 @@
+{
+  "name": "hr-portal-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for HR Portal",
+  "main": "index.js",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"Tests will be added by Builder Agent\" && exit 0"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.5.0"
+  },
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.0.5455"
+  }
+}

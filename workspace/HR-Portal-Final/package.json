@@ -1,0 +1,40 @@
+{
+  "name": "hr-portal-final",
+  "version": "1.0.0",
+  "description": "Modern ESS/HR Portal built with Next.js 16 and Azure",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.1.6",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "prettier": "^3.3.0",
+    "typescript": "^5.4.0"
+  },
+  "keywords": [
+    "hr",
+    "ess",
+    "employee-self-service",
+    "nextjs",
+    "azure"
+  ],
+  "author": "",
+  "license": "ISC"
+}

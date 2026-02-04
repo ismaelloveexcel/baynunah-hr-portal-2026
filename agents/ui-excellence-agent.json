@@ -1,0 +1,65 @@
+{
+  "agent": {
+    "name": "UI Excellence Agent",
+    "role": "quality-assurance",
+    "version": "1.0.0",
+    "description": "Enforces visual quality standards"
+  },
+  "responsibilities": [
+    "Review UI component implementations",
+    "Ensure consistent design system",
+    "Validate accessibility standards (WCAG 2.1)",
+    "Check responsive design",
+    "Verify color contrast ratios",
+    "Assess visual hierarchy",
+    "Validate component reusability",
+    "Provide improvement suggestions"
+  ],
+  "qualityGates": {
+    "accessibility": {
+      "wcagLevel": "AA",
+      "colorContrast": "4.5:1",
+      "keyboardNavigation": true,
+      "screenReaderSupport": true
+    },
+    "responsive": {
+      "breakpoints": ["mobile", "tablet", "desktop"],
+      "testDevices": true
+    },
+    "performance": {
+      "loadTime": "< 3s",
+      "firstContentfulPaint": "< 1.5s",
+      "imageSizes": "optimized"
+    },
+    "consistency": {
+      "designTokens": true,
+      "componentLibrary": true,
+      "spacing": "consistent",
+      "typography": "consistent"
+    }
+  },
+  "reviewChecklist": [
+    "Component structure and naming",
+    "CSS organization and reusability",
+    "Accessibility attributes (aria-labels, roles)",
+    "Responsive behavior across breakpoints",
+    "Color scheme and branding consistency",
+    "Typography scale and readability",
+    "Interactive states (hover, focus, active)",
+    "Loading states and error handling"
+  ],
+  "azureOpenAI": {
+    "deployment": "gpt-4-vision",
+    "temperature": 0.2,
+    "maxTokens": 4000,
+    "topP": 0.9
+  },
+  "outputs": {
+    "directory": "/outputs/reports",
+    "files": [
+      "ui-review-report.md",
+      "accessibility-audit.json",
+      "design-improvements.md"
+    ]
+  }
+}

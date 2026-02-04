@@ -1,0 +1,68 @@
+{
+  "azureOpenAI": {
+    "endpoint": "${AZURE_OPENAI_ENDPOINT}",
+    "apiKey": "${AZURE_OPENAI_KEY}",
+    "apiVersion": "2024-02-01"
+  },
+  "models": {
+    "supervisor": {
+      "deployment": "gpt-4",
+      "temperature": 0.3,
+      "maxTokens": 4000,
+      "topP": 0.95,
+      "frequencyPenalty": 0,
+      "presencePenalty": 0
+    },
+    "discovery": {
+      "deployment": "gpt-4",
+      "temperature": 0.2,
+      "maxTokens": 8000,
+      "topP": 0.9
+    },
+    "architect": {
+      "deployment": "gpt-4",
+      "temperature": 0.5,
+      "maxTokens": 8000,
+      "topP": 0.95
+    },
+    "builder": {
+      "deployment": "gpt-4",
+      "temperature": 0.3,
+      "maxTokens": 8000,
+      "topP": 0.9
+    },
+    "uiExcellence": {
+      "deployment": "gpt-4-vision",
+      "temperature": 0.2,
+      "maxTokens": 4000,
+      "topP": 0.9
+    },
+    "uxReviewer": {
+      "deployment": "gpt-4",
+      "temperature": 0.3,
+      "maxTokens": 6000,
+      "topP": 0.9
+    },
+    "gapAnalyst": {
+      "deployment": "gpt-4",
+      "temperature": 0.4,
+      "maxTokens": 6000,
+      "topP": 0.95
+    },
+    "azureDeploy": {
+      "deployment": "gpt-4",
+      "temperature": 0.2,
+      "maxTokens": 4000,
+      "topP": 0.9
+    }
+  },
+  "rateLimits": {
+    "requestsPerMinute": 60,
+    "tokensPerMinute": 90000,
+    "retryStrategy": {
+      "maxRetries": 3,
+      "backoffMultiplier": 2,
+      "initialDelayMs": 1000
+    }
+  }
+}

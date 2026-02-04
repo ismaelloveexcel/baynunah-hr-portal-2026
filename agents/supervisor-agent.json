@@ -1,0 +1,79 @@
+{
+  "agent": {
+    "name": "Supervisor Agent",
+    "role": "orchestrator",
+    "version": "1.0.0",
+    "description": "Central orchestrator that manages all agents and workflow"
+  },
+  "responsibilities": [
+    "Start discovery immediately upon initialization",
+    "Trigger architecture proposals",
+    "Initialize Azure resources and early deployment",
+    "Kick off builder agent for feature PRs",
+    "Enforce UI/UX gates",
+    "Ensure continuous deployability",
+    "Monitor agent progress and task completion",
+    "Handle inter-agent communication"
+  ],
+  "workflow": {
+    "stages": [
+      {
+        "stage": "discovery",
+        "agent": "discovery-agent",
+        "priority": "high",
+        "description": "Deep scan all repos and build feature inventory"
+      },
+      {
+        "stage": "architecture",
+        "agent": "solution-architect",
+        "priority": "high",
+        "description": "Create 2-3 ESS proposals and final architecture",
+        "dependsOn": ["discovery"]
+      },
+      {
+        "stage": "deployment-setup",
+        "agent": "azure-deploy-assist",
+        "priority": "high",
+        "description": "Initialize Azure resources",
+        "parallel": true
+      },
+      {
+        "stage": "building",
+        "agent": "builder-agent",
+        "priority": "medium",
+        "description": "Rebuild and merge features",
+        "dependsOn": ["architecture"]
+      },
+      {
+        "stage": "quality-gates",
+        "agents": ["ui-excellence-agent", "ux-reviewer-agent"],
+        "priority": "medium",
+        "description": "Enforce quality standards",
+        "dependsOn": ["building"]
+      },
+      {
+        "stage": "gap-analysis",
+        "agent": "product-gap-analyst",
+        "priority": "low",
+        "description": "Identify missing features",
+        "parallel": true
+      }
+    ]
+  },
+  "azureOpenAI": {
+    "deployment": "gpt-4",
+    "temperature": 0.3,
+    "maxTokens": 4000,
+    "topP": 0.95
+  },
+  "outputs": {
+    "directory": "/outputs/supervisor",
+    "formats": ["json", "markdown"],
+    "includes": [
+      "workflow-status",
+      "agent-assignments",
+      "progress-reports",
+      "error-logs"
+    ]
+  }
+}
